@@ -1,0 +1,1 @@
+module.exports=Object.freeze({SITE_URL:'https://tradersecosystem.com',SUPABASE_ORIGIN:'https://pzasrndaxmkcsnzrodtt.supabase.co',AUTH_CALLBACK:'ecosystemjournal://auth/callback',APP_ID:'com.tradersecosystem.journal'});

@@ -1,0 +1,88 @@
+{
+  "name": "ecosystem-journal-desktop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ecosystem Journal desktop",
+  "author": "Ecosystem Journal",
+  "main": "src/main.cjs",
+  "scripts": {
+    "dev": "electron .",
+    "test": "node --test tests/*.test.cjs",
+    "dist": "electron-builder --win nsis --x64",
+    "pack": "electron-builder --dir --win --x64",
+    "dist:mac": "electron-builder --mac dmg zip"
+  },
+  "dependencies": {
+    "electron-updater": "6.8.9"
+  },
+  "devDependencies": {
+    "electron": "45.0.0",
+    "electron-builder": "26.15.3"
+  },
+  "build": {
+    "appId": "com.tradersecosystem.journal",
+    "productName": "Ecosystem Journal",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "src/**",
+      "assets/**",
+      "package.json"
+    ],
+    "protocols": [
+      {
+        "name": "Ecosystem Journal",
+        "schemes": [
+          "ecosystemjournal"
+        ]
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico",
+      "artifactName": "EcosystemJournal-Setup-${version}.exe"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "allowElevation": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "deleteAppDataOnUninstall": false
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Sammyuke",
+        "repo": "Ecosystem-Journal-Desktop",
+        "releaseType": "release"
+      }
+    ],
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.finance",
+      "icon": "assets/icon.png",
+      "hardenedRuntime": true,
+      "entitlements": "assets/entitlements.mac.plist",
+      "entitlementsInherit": "assets/entitlements.mac.plist",
+      "extendInfo": {
+        "NSMicrophoneUsageDescription": "Record voice notes and dictate journal entries."
+      },
+      "artifactName": "EcosystemJournal-${version}-${arch}.${ext}"
+    },
+    "dmg": {
+      "title": "Ecosystem Journal"
+    }
+  }
+}

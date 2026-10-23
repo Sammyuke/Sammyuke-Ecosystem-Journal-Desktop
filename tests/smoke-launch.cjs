@@ -1,0 +1,5 @@
+const {app,BrowserWindow,session}=require('electron');const assert=require('node:assert/strict');
+app.on('browser-window-created',(_event,win)=>{win.webContents.on('did-finish-load',async()=>{try{const p=win.webContents.getLastWebPreferences();assert.equal(p.sandbox,true);assert.equal(p.contextIsolation,true);assert.equal(p.nodeIntegration,false);assert.deepEqual(win.getMinimumSize(),[1000,650]);if(win.webContents.getURL().startsWith('data:')){const text=await win.webContents.executeJavaScript('document.body.innerText');assert.ok(text.includes("Can\'t reach Ecosystem Journal"));console.log('PASS: Electron launched with isolation, sandbox, minimum size, branded offline screen and Retry.');app.exit(0)}}catch(e){console.error(e.message);app.exit(1)}})});
+app.whenReady().then(()=>session.defaultSession.webRequest.onBeforeRequest({urls:['https://tradersecosystem.com/*']},(_d,cb)=>cb({cancel:true})));
+require('../src/main.cjs');
+setTimeout(()=>{console.error('Smoke test timed out');app.exit(1)},25000).unref();
