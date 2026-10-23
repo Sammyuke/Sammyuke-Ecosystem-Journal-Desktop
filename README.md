@@ -33,13 +33,13 @@ Email/password stays in the window. Password reset can remain in the browser. Go
 
 ## Release repository and updates
 
-Create a **public** GitHub repository named `Sammyuke/Ecosystem-Journal-Desktop`, without connecting it to Netlify. This name is used by `build.publish` and by the website download section; update both if you choose another name.
+Create a **public** GitHub repository named `Sammyuke/Sammyuke-Ecosystem-Journal-Desktop`, without connecting it to Netlify. This name is used by `build.publish` and by the website download section; update both if you choose another name.
 
 ```powershell
 git branch -M main
 git add .
 git commit -m "Build Ecosystem Journal desktop"
-git remote add origin https://github.com/Sammyuke/Ecosystem-Journal-Desktop.git
+git remote add origin https://github.com/Sammyuke/Sammyuke-Ecosystem-Journal-Desktop.git
 git push -u origin main
 git tag v1.0.0
 git push origin v1.0.0
